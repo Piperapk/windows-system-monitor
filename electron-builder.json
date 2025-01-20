@@ -1,0 +1,16 @@
+{
+  "appId": "com.example.electronapp",
+  "productName": "ElectronApp",
+  "files": ["dist-electron", "dist-react"],
+  "icon": "./icon.png",
+  "win": {
+    "target": ["portable", "msi"]
+  },
+  "mac": {
+    "target": "dmg"
+  },
+  "linux": {
+    "target": "AppImage",
+    "category": "Utility"
+  }
+}
