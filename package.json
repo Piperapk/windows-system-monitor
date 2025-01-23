@@ -1,9 +1,12 @@
 {
   "name": "electron-test",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "dist-electron/main.js",
+  "author": {
+    "name": "Ivan Krushkov"
+  },
   "scripts": {
     "dev": "npm-run-all --parallel dev:react dev:electron",
     "dev:react": "vite",
@@ -16,7 +19,8 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "systeminformation": "^5.25.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

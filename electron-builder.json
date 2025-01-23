@@ -12,5 +12,6 @@
   "linux": {
     "target": "AppImage",
     "category": "Utility"
-  }
+  },
+  "extraResources": ["dist-electron/preload.cjs"]
 }
