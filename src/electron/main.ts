@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import path from "path";
-import { isDev } from "./utils.js";
-import { getStaticInformation, getPooledInformation } from "./resources.js";
+import { getPreloadPath, isDev } from "./utils.js";
+import { getStaticInformation, getIntervalInformation } from "./resources.js";
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
@@ -16,17 +16,9 @@ app.on("ready", () => {
     mainWindow.loadFile(path.join(app.getAppPath(), "dist-react/index.html"));
   }
 
-  getPooledInformation(mainWindow);
+  getIntervalInformation(mainWindow);
 
-  ipcMain.handle("onGetStaticInformation", () => {
+  ipcMain.handle("static-information", () => {
     return getStaticInformation();
   });
 });
-
-function getPreloadPath() {
-  return path.join(
-    app.getAppPath(),
-    isDev() ? "." : "..",
-    "dist-electron/preload.cjs"
-  );
-}

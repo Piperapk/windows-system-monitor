@@ -1,24 +1,27 @@
 import { BrowserWindow } from "electron";
 import * as system from "systeminformation";
 
-export function getPooledInformation(mainWindow: BrowserWindow) {
-  setInterval(() => {
-    console.log("Getting polled system information...");
-    mainWindow.webContents.send("pooled-information", {});
-  }, 2500);
+const POOLING_RATE = 2500;
+
+export function getIntervalInformation(mainWindow: BrowserWindow) {
+  setInterval(async () => {
+    const dynamicData = {
+      currentLoad: "currentLoad",
+      mem: "free, used",
+      processes: "list",
+    };
+
+    const result = await system.get(dynamicData);
+    mainWindow.webContents.send("interval-information", { result });
+  }, POOLING_RATE);
 }
 
-export function getStaticInformation() {
-  return getSystemData();
-}
-
-async function getSystemData() {
-  // define all values, you want to get back
+export async function getStaticInformation() {
   const staticData = {
     cpu: "*",
     osInfo: "platform, release, arch",
     graphics: "controllers, displays",
-    mem: "total, free, used",
+    mem: "total",
   };
 
   try {

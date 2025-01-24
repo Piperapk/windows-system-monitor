@@ -1,11 +1,10 @@
-const electron = require("electron");
+const { contextBridge, ipcRenderer } = require("electron");
 
-electron.contextBridge.exposeInMainWorld("electronAPI", {
-  sendIntervalData: (callback: (statistics: any) => void) => {
-    electron.ipcRenderer.on("static-information", (_, data) => {
-      callback(data);
+contextBridge.exposeInMainWorld("electronAPI", {
+  getIntervalInformation: (callback: (data: any) => void) => {
+    ipcRenderer.on("interval-information", (_event, result) => {
+      callback(result);
     });
   },
-  getStaticInformation: () =>
-    electron.ipcRenderer.invoke("onGetStaticInformation"),
+  getStaticInformation: () => ipcRenderer.invoke("static-information"),
 });

@@ -6,12 +6,12 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
-  // useEffect(() => {
-  //   // @ts-ignore
-  //   window.electron.sendIntervalData(data => {
-  //     console.log(data);
-  //   })
-  // }, [])
+  useEffect(() => {
+    // @ts-ignore
+    window.electronAPI.getIntervalInformation(data => {
+      console.log(data);
+    })
+  }, [])
 
   return (
     <>
