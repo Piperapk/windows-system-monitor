@@ -1,6 +1,10 @@
 import { app, BrowserWindow } from "electron";
-import path from "path";
-import { getPreloadPath, ipcMainHandle, isDev } from "./utils.js";
+import {
+  getPreloadPath,
+  getRendererPath,
+  ipcMainHandle,
+  isDev,
+} from "./utils.js";
 import { getStaticInformation, getIntervalInformation } from "./resources.js";
 
 app.on("ready", () => {
@@ -13,7 +17,7 @@ app.on("ready", () => {
   if (isDev()) {
     mainWindow.loadURL("http://localhost:5123");
   } else {
-    mainWindow.loadFile(path.join(app.getAppPath(), "dist-react/index.html"));
+    mainWindow.loadFile(getRendererPath());
   }
 
   getIntervalInformation(mainWindow);
