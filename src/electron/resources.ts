@@ -1,5 +1,6 @@
 import { BrowserWindow } from "electron";
 import * as system from "systeminformation";
+import { StaticData } from "../../types.js";
 
 const POOLING_RATE = 2500;
 
@@ -12,11 +13,11 @@ export function getIntervalInformation(mainWindow: BrowserWindow) {
     };
 
     const result = await system.get(dynamicData);
-    mainWindow.webContents.send("interval-information", { result });
+    mainWindow.webContents.send("interval-information", result);
   }, POOLING_RATE);
 }
 
-export async function getStaticInformation() {
+export async function getStaticInformation(): Promise<StaticData> {
   const staticData = {
     cpu: "*",
     osInfo: "platform, release, arch",
@@ -29,5 +30,6 @@ export async function getStaticInformation() {
     return result;
   } catch (e) {
     console.log(e);
+    throw e;
   }
 }
