@@ -1,5 +1,5 @@
 import path from "path";
-import { app, ipcMain } from "electron";
+import { app, ipcMain, WebContents } from "electron";
 import { EventMapping } from "../../types.js";
 
 export function isDev(): boolean {
@@ -15,9 +15,18 @@ export function getPreloadPath() {
 }
 
 // Type-safe IPC handle wrapper
-export function ipcHandle<Key extends keyof EventMapping>(
+export function ipcMainHandle<Key extends keyof EventMapping>(
   key: Key,
   handler: () => EventMapping[Key] | Promise<EventMapping[Key]>
 ) {
   ipcMain.handle(key, () => handler());
+}
+
+// Type-safe WebContents send wrapper
+export function ipcWebContentsSend<Key extends keyof EventMapping>(
+  key: Key,
+  webContents: WebContents,
+  data: EventMapping[Key]
+) {
+  webContents.send(key, data);
 }

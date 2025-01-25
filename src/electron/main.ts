@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import path from "path";
-import { getPreloadPath, ipcHandle, isDev } from "./utils.js";
+import { getPreloadPath, ipcMainHandle, isDev } from "./utils.js";
 import { getStaticInformation, getIntervalInformation } from "./resources.js";
 
 app.on("ready", () => {
@@ -18,7 +18,7 @@ app.on("ready", () => {
 
   getIntervalInformation(mainWindow);
 
-  ipcHandle("static-information", () => {
+  ipcMainHandle("static-information", () => {
     return getStaticInformation();
   });
 });

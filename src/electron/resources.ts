@@ -1,6 +1,7 @@
 import { BrowserWindow } from "electron";
 import * as system from "systeminformation";
 import { StaticData } from "../../types.js";
+import { ipcWebContentsSend } from "./utils.js";
 
 const POOLING_RATE = 2500;
 
@@ -13,7 +14,7 @@ export function getIntervalInformation(mainWindow: BrowserWindow) {
     };
 
     const result = await system.get(dynamicData);
-    mainWindow.webContents.send("interval-information", result);
+    ipcWebContentsSend("interval-information", mainWindow.webContents, result);
   }, POOLING_RATE);
 }
 
