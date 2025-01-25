@@ -1,6 +1,5 @@
 import path from "path";
 import { app, ipcMain, WebContents } from "electron";
-import { EventMapping } from "../../types.js";
 
 export function isDev(): boolean {
   return process.env.NODE_ENV === "development";

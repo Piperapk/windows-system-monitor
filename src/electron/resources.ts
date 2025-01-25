@@ -1,6 +1,5 @@
 import { BrowserWindow } from "electron";
 import * as system from "systeminformation";
-import { StaticData } from "../../types.js";
 import { ipcWebContentsSend } from "./utils.js";
 
 const POOLING_RATE = 2500;
