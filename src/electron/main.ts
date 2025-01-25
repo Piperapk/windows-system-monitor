@@ -1,10 +1,5 @@
 import { app, BrowserWindow } from "electron";
-import {
-  getPreloadPath,
-  getRendererPath,
-  ipcMainHandle,
-  isDev,
-} from "./utils.js";
+import { getPreloadPath, getRendererPath, ipcMainHandle, isDev } from "./utils.js";
 import { getStaticInformation, getIntervalInformation } from "./resources.js";
 
 app.on("ready", () => {

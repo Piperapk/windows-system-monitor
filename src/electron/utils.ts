@@ -7,11 +7,7 @@ export function isDev(): boolean {
 }
 
 export function getPreloadPath() {
-  return path.join(
-    app.getAppPath(),
-    isDev() ? "." : "..",
-    "dist-electron/preload.cjs"
-  );
+  return path.join(app.getAppPath(), isDev() ? "." : "..", "dist-electron/preload.cjs");
 }
 
 export function getRendererPath() {

@@ -19,9 +19,11 @@ declare global {
     "static-information": StaticData;
   };
 
+  type UnsubscribeFunction = () => void;
+
   interface Window {
     electronAPI: {
-      getIntervalInformation: (callback: (data: DynamicData) => void) => void;
+      getIntervalInformation: (callback: (data: DynamicData) => void) => UnsubscribeFunction;
       getStaticInformation: () => Promise<StaticData>;
     };
   }
