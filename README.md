@@ -2,7 +2,7 @@
 
 An electron-based Windows app to monitor system resources
 
-Built using React, TypeScript, Electron and Electron Builder
+Built using React, TypeScript, Electron, Electron Builder and Vite.
 
 ## Getting started
 
