@@ -3,11 +3,21 @@ import path from "path";
 import { getAssetPath, getPreloadPath, getRendererPath, ipcMainHandle, isDev } from "./utils.js";
 import { getStaticInformation, getIntervalInformation } from "./resources.js";
 
+if (!isDev()) {
+  Menu.setApplicationMenu(null);
+}
+
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: getPreloadPath(),
     },
+    frame: false,
+    resizable: false,
+    maximizable: false,
+    useContentSize: true,
+    width: 250,
+    height: 250,
   });
 
   if (isDev()) {

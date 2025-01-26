@@ -1,6 +1,7 @@
 import type React from "react";
 import { useMemo } from "react";
 import "./SystemMonitorWidget.css";
+import { Cpu, MemoryStickIcon, AlignJustify } from "lucide-react";
 
 interface DisplayInformation {
   cpu: number;
@@ -23,36 +24,48 @@ const SystemMonitorWidget: React.FC<Props> = ({ intervalInformation }) => {
     return { cpu, processes, memoryUsed, memoryTotal };
   }, [intervalInformation]);
 
-  const renderProgressBar = (value: number, total: number, label: string, symbol: string) => (
-    <div className="progress-container">
-      <div className="progress-header">
+  const renderProgressBar = (
+    value: number,
+    total: number,
+    label: string,
+    symbol: string,
+    Icon: React.ElementType
+  ) => (
+    <div className="mb-5">
+      <div className="flex justify-start text-sm font-semibold">
+        <Icon className="mt-0.5" size={16} />
         <span>{label}</span>
         <span>
           {value.toFixed(0)}
           {symbol}
         </span>
       </div>
-      <div className="progress-bar">
-        <div className="progress-fill" style={{ width: `${total}%` }}></div>
+      <div className="h-2 bg-gray-200 rounded-lg overflow-hidden">
+        <div
+          className="h-full bg-slate-700 transition-all ease-in"
+          style={{ width: `${total}%` }}
+        ></div>
       </div>
     </div>
   );
 
   return (
-    <div className="system-monitor-widget">
-      <h2>System Monitor</h2>
-      {renderProgressBar(displayInformation.cpu, displayInformation.cpu, "CPU", "%")}
-      {renderProgressBar(
-        displayInformation.processes,
-        displayInformation.processes,
-        "Processes",
-        ""
-      )}
+    <div className="wrapper w-full p-6 rounded-lg">
+      <h2 className="mb-4 font-bold">System Monitor</h2>
+      {renderProgressBar(displayInformation.cpu, displayInformation.cpu, "CPU", "%", Cpu)}
       {renderProgressBar(
         displayInformation.memoryUsed,
         (displayInformation.memoryUsed / displayInformation.memoryTotal) * 100 || 0,
         "Memory",
-        " GB"
+        "GB",
+        MemoryStickIcon
+      )}
+      {renderProgressBar(
+        displayInformation.processes,
+        displayInformation.processes,
+        "Processes",
+        "",
+        AlignJustify
       )}
     </div>
   );
