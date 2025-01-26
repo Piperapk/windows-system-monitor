@@ -2,7 +2,7 @@ import { BrowserWindow } from "electron";
 import * as system from "systeminformation";
 import { ipcWebContentsSend } from "./utils.js";
 
-const POOLING_RATE = 2500;
+const POOLING_RATE = 3000;
 
 export function getIntervalInformation(mainWindow: BrowserWindow) {
   setInterval(async () => {

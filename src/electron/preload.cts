@@ -14,7 +14,7 @@ function ipcRendererOn<Key extends keyof EventMapping>(
   callback: (result: EventMapping[Key]) => void
 ) {
   const wrapperCallback = (_event: Electron.IpcRendererEvent, result: any) => callback(result); // Electron event type returns any
-  ipcRenderer.on(key, wrapperCallback); // Rub subscribe
+  ipcRenderer.on(key, wrapperCallback); // Run subscribe
   return () => ipcRenderer.off(key, wrapperCallback); // Return unsubscribe function
 }
 
