@@ -1,13 +1,6 @@
 import { Systeminformation } from "systeminformation";
 
 declare global {
-  interface DisplayInformation {
-    cpu: number;
-    gpu: number;
-    memoryUsed: number;
-    memoryTotal: number;
-  }
-
   type DynamicData = {
     currentLoad: Systeminformation.CurrentLoadData;
     mem: Systeminformation.MemData;
