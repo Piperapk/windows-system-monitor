@@ -2,7 +2,7 @@
   "appId": "com.example.electronapp",
   "productName": "ElectronApp",
   "files": ["dist-electron", "dist-react"],
-  "icon": "./icon.png",
+  "icon": "./src/assets/icon.png",
   "win": {
     "target": ["portable", "msi"]
   },
@@ -13,5 +13,5 @@
     "target": "AppImage",
     "category": "Utility"
   },
-  "extraResources": ["dist-electron/preload.cjs"]
+  "extraResources": ["dist-electron/preload.cjs", "src/assets/**"]
 }

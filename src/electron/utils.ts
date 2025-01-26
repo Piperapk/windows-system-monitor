@@ -14,6 +14,10 @@ export function getRendererPath() {
   return path.join(app.getAppPath(), "dist-react/index.html");
 }
 
+export function getAssetPath() {
+  return path.join(app.getAppPath(), isDev() ? "." : "..", "/src/assets");
+}
+
 // Type-safe IPC handle wrapper
 export function ipcMainHandle<Key extends keyof EventMapping>(
   key: Key,
