@@ -1,3 +1,5 @@
+import { ChevronRight } from "lucide-react";
+
 interface Props {
   value: number;
   total: number;
@@ -12,10 +14,13 @@ const InformationLineAndBar: React.FC<Props> = ({ value, total, label, symbol, I
       <div className="flex justify-start text-sm font-semibold">
         <Icon className="mt-0.5 mr-1" size={16} />
         <span>{label}</span>
-        <span className="ml-auto">
-          {value.toFixed(0)}
-          {symbol}
-        </span>
+        <div className="ml-auto flex">
+          <span>
+            {value.toFixed(0)}
+            {symbol}
+          </span>
+          <ChevronRight className="mt-0.5" size={16} />
+        </div>
       </div>
       <div className="h-2 bg-gray-200 rounded-lg overflow-hidden">
         <div
