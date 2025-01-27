@@ -17,7 +17,7 @@ app.on("ready", () => {
     maximizable: false,
     useContentSize: true,
     width: 250,
-    height: 250,
+    height: 230,
   });
 
   if (isDev()) {

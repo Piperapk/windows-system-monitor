@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import SystemMonitorWidget from "./components/SystemMonitorWidget";
+import { createContext } from "react";
+export const IntervalInformationContext = createContext<DynamicData | null>(null);
 
 function App() {
   const [intervalInformation, setIntervalInformation] = useState<DynamicData | null>(null);
@@ -15,7 +17,9 @@ function App() {
 
   return (
     <>
-      <SystemMonitorWidget intervalInformation={intervalInformation} />
+      <IntervalInformationContext.Provider value={intervalInformation}>
+        <SystemMonitorWidget />
+      </IntervalInformationContext.Provider>
     </>
   );
 }
