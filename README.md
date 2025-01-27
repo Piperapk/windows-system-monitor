@@ -6,6 +6,13 @@ Built using React, TypeScript, Electron, Electron Builder and Vite.
 
 ![image](./public/screenshot.png)
 
+## Features
+
+- CPU Utilization
+- Memory Utilization
+- Top processes Utilization
+- Minimize to tray
+
 ## Getting started
 
 - Clone the repo and run `npm run dev` in your terminal
