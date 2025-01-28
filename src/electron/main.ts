@@ -39,7 +39,7 @@ function setupAPI(mainWindow: BrowserWindow) {
   });
 }
 
-function setupTray(mainWindow: BrowserWindow) {
+export function setupTray(mainWindow: BrowserWindow) {
   const tray = new Tray(path.join(getAssetPath(), "iconTray.png"));
 
   const contextMenu = Menu.buildFromTemplate([
