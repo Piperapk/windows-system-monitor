@@ -1,27 +1,39 @@
 import { test, expect, _electron } from "@playwright/test";
 
+let electronApp: Awaited<ReturnType<typeof _electron.launch>>;
+let mainPage: Awaited<ReturnType<typeof electronApp.firstWindow>>;
+
+async function waitForPreloadScript() {
+  return new Promise((resolve) => {
+    const interval = setInterval(async () => {
+      const electronBridge = await mainPage.evaluate(() => {
+        return window as Window;
+      });
+      if (electronBridge) {
+        clearInterval(interval);
+        resolve(true);
+      }
+    }, 100);
+  });
+}
+
 test.beforeEach(async () => {
-  const electron = await _electron.launch({
+  electronApp = await _electron.launch({
     args: ["."],
     env: { NODE_ENV: "development" },
   });
 
-  const mainWindow = await electron.firstWindow();
+  mainPage = await electronApp.firstWindow();
+
+  await waitForPreloadScript();
 });
 
-test("has title", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+test.afterEach(async () => {
+  await electronApp.close();
 });
 
-test("get started link", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Click the get started link.
-  await page.getByRole("link", { name: "Get started" }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole("heading", { name: "Installation" })).toBeVisible();
+test("should open a window", async () => {
+  await mainPage.waitForLoadState("domcontentloaded");
+  console.log(await mainPage.title());
+  expect(await mainPage.title()).toBe("Windows System Monitor");
 });
